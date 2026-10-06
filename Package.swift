@@ -55,6 +55,17 @@ let package = Package(
                 .define("AS_USE_MAPKIT", to: "1"),
                 .define("AS_USE_PHOTOS", to: "1"),
                 .define("AS_USE_ASSETS_LIBRARY", to: "1"),
+            ],
+            // Mirrors the podspec's `frameworks` for the default subspecs;
+            // SwiftPM passes these when linking the final executable of a
+            // package that depends on the static AsyncDisplayKit product.
+            linkerSettings: [
+                .linkedFramework("AVFoundation"),
+                .linkedFramework("CoreMedia"),
+                .linkedFramework("CoreLocation"),
+                .linkedFramework("MapKit"),
+                .linkedFramework("Photos"),
+                .linkedFramework("AssetsLibrary"),
             ]
         ),
     ],

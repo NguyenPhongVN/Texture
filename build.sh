@@ -267,6 +267,68 @@ carthage|all)
     success="1"
     ;;
 
+spm|all)
+    echo "Verifying that the Swift package builds (iOS & tvOS simulators)."
+
+    package_name="spm-smoke"
+    client_dir="$(mktemp -d "${TMPDIR:-/tmp}/texture-spm-smoke.XXXXXX")"
+    repo_root="$(pwd)"
+
+    # A minimal consumer app package: exercises package resolution, the
+    # ObjC++ build, module import, and linking of the static product the
+    # same way an app integrating Texture via SPM would.
+    mkdir -p "$client_dir/Sources/$package_name"
+    cat > "$client_dir/Package.swift" <<EOF
+// swift-tools-version:5.6
+import PackageDescription
+
+let package = Package(
+    name: "$package_name",
+    platforms: [.iOS(.v14), .tvOS(.v14)],
+    dependencies: [
+        .package(path: "$repo_root")
+    ],
+    targets: [
+        .executableTarget(
+            name: "$package_name",
+            dependencies: [.product(name: "AsyncDisplayKit", package: "Texture")],
+            path: "Sources/$package_name"
+        )
+    ]
+)
+EOF
+    cat > "$client_dir/Sources/$package_name/main.swift" <<'EOF'
+import AsyncDisplayKit
+import UIKit
+
+final class SmokeNode: ASDisplayNode {
+    let image = ASNetworkImageNode()
+
+    override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+        ASStackLayoutSpec(
+            direction: .vertical,
+            spacing: 0,
+            justifyContent: .start,
+            alignItems: .stretch,
+            children: [ASInsetLayoutSpec(insets: .zero, child: image)]
+        )
+    }
+}
+
+_ = SmokeNode()
+print("AsyncDisplayKit loaded via SPM")
+EOF
+    for platform in "$PLATFORM" "${TEXTURE_TVOS_PLATFORM:-platform=tvOS Simulator,OS=26.5,name=Apple TV}"; do
+        echo "Building SPM smoke package for $platform"
+        (cd "$client_dir" && set -o pipefail && xcodebuild \
+            -scheme "$(xcodebuild -list 2>/dev/null | awk '/Schemes:/{getline; print $1; exit}')" \
+            -destination "$platform" \
+            build)
+    done
+    rm -rf "$client_dir"
+    success="1"
+    ;;
+
 *)
     echo "Unrecognized mode '$MODE'."
     ;;
