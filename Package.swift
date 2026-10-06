@@ -54,7 +54,9 @@ let package = Package(
                 .define("AS_USE_VIDEO", to: "1"),
                 .define("AS_USE_MAPKIT", to: "1"),
                 .define("AS_USE_PHOTOS", to: "1"),
-                .define("AS_USE_ASSETS_LIBRARY", to: "1"),
+                // Matches the podspec, where the AssetsLibrary subspec is
+                // iOS-only: the framework does not exist in the tvOS SDK.
+                .define("AS_USE_ASSETS_LIBRARY", to: "1", .when(platforms: [.iOS])),
             ],
             // Mirrors the podspec's `frameworks` for the default subspecs;
             // SwiftPM passes these when linking the final executable of a
@@ -65,7 +67,7 @@ let package = Package(
                 .linkedFramework("CoreLocation"),
                 .linkedFramework("MapKit"),
                 .linkedFramework("Photos"),
-                .linkedFramework("AssetsLibrary"),
+                .linkedFramework("AssetsLibrary", .when(platforms: [.iOS])),
             ]
         ),
     ],
