@@ -10,11 +10,23 @@
 
 [![Version](https://img.shields.io/cocoapods/v/Texture.svg)](http://cocoapods.org/pods/Texture)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-59C939.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Swift Package Manager compatible](https://img.shields.io/badge/SPM-compatible-4EBC5B.svg?style=flat)](https://swift.org/package-manager/)
 [![License](https://img.shields.io/cocoapods/l/Texture.svg)](https://github.com/texturegroup/texture/blob/master/LICENSE)
 
 ## Installation
 
-Texture is available via CocoaPods or Carthage. See our [Installation](http://texturegroup.org/docs/installation.html) guide for instructions.
+Texture is available via CocoaPods, Carthage, or Swift Package Manager.
+
+With Swift Package Manager, add this repository and use the `AsyncDisplayKit`
+product:
+
+```swift
+.package(url: "https://github.com/TextureGroup/Texture.git", from: "3.2.0")
+```
+
+The SPM package builds the default subspec set (Core, PINRemoteImage, Video,
+MapKit, Photos, AssetsLibrary); IGListKit and Yoga remain opt-in via
+CocoaPods. See our [Installation](http://texturegroup.org/docs/installation.html) guide for instructions.
 
 ## Performance Gains
 

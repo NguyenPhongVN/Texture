@@ -7,10 +7,10 @@
 //
 
 #import "ASDefaultImageDownloader.h"
-#import <AsyncDisplayKit/ASThread.h>
-#import <AsyncDisplayKit/ASBasicImageDownloader.h>
+#import "ASThread.h"
+#import "ASBasicImageDownloader.h"
 #if AS_PIN_REMOTE_IMAGE
-#import <AsyncDisplayKit/ASPINRemoteImageDownloader.h>
+#import "ASPINRemoteImageDownloader.h"
 #endif
 
 using AS::MutexLocker;

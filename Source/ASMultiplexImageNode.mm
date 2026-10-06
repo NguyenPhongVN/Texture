@@ -7,25 +7,25 @@
 //  Licensed under Apache 2.0: http://www.apache.org/licenses/LICENSE-2.0
 //
 
-#import <AsyncDisplayKit/ASMultiplexImageNode.h>
+#import "ASMultiplexImageNode.h"
 
 #if TARGET_OS_IOS && AS_USE_ASSETS_LIBRARY
 #import <AssetsLibrary/AssetsLibrary.h>
 #endif
 
-#import <AsyncDisplayKit/ASDisplayNodeExtras.h>
-#import <AsyncDisplayKit/ASDisplayNode+Subclasses.h>
-#import <AsyncDisplayKit/ASDisplayNode+FrameworkPrivate.h>
-#import <AsyncDisplayKit/ASEqualityHelpers.h>
-#import <AsyncDisplayKit/ASInternalHelpers.h>
-#import <AsyncDisplayKit/ASLog.h>
-#import <AsyncDisplayKit/ASThread.h>
+#import "ASDisplayNodeExtras.h"
+#import "ASDisplayNode+Subclasses.h"
+#import "ASDisplayNode+FrameworkPrivate.h"
+#import "ASEqualityHelpers.h"
+#import "ASInternalHelpers.h"
+#import "ASLog.h"
+#import "ASThread.h"
 
 #if AS_USE_PHOTOS
-#import <AsyncDisplayKit/ASPhotosFrameworkImageRequest.h>
+#import "ASPhotosFrameworkImageRequest.h"
 #endif
 
-#import <AsyncDisplayKit/ASDefaultImageDownloader.h>
+#import "ASDefaultImageDownloader.h"
 
 using AS::MutexLocker;
 

@@ -7,14 +7,14 @@
 //  Licensed under Apache 2.0: http://www.apache.org/licenses/LICENSE-2.0
 //
 
-#import <AsyncDisplayKit/ASAvailability.h>
+#import "ASAvailability.h"
 
 #if AS_PIN_REMOTE_IMAGE
-#import <AsyncDisplayKit/ASPINRemoteImageDownloader.h>
+#import "ASPINRemoteImageDownloader.h"
 
-#import <AsyncDisplayKit/ASAssert.h>
-#import <AsyncDisplayKit/ASThread.h>
-#import <AsyncDisplayKit/ASImageContainerProtocolCategories.h>
+#import "ASAssert.h"
+#import "ASThread.h"
+#import "ASImageContainerProtocolCategories.h"
 
 #if __has_include (<PINRemoteImage/PINGIFAnimatedImage.h>)
 #define PIN_ANIMATED_AVAILABLE 1
